@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { DatatableComponent } from '@swimlane/ngx-datatable';
 interface Coin {
   id: string;
   name: string;
@@ -37,6 +38,14 @@ export class AppComponent implements OnInit{
   ];
   columns = [{ prop: 'name' }, { name: 'Gender' }, { name: 'Company' }];
 
+  columns1 = [{ name: 'ID', prop: 'id' }, { prop: 'name' }, { name: 'Symbol', prop: 'symbol' }, { name: 'Image', prop: 'image' }, { name: 'Current Price', prop: 'current_price' }, { name: 'Price Change', prop: 'price_change_percentage_24h' }, { name: '24h Volume', prop: 'total_volume' }];
+  rows1: any = [];
+
+  rows2:any = [];
+  temp2:any = [];
+
+  @ViewChild(DatatableComponent) table: DatatableComponent;
+
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
@@ -44,6 +53,11 @@ export class AppComponent implements OnInit{
       .subscribe((response) => {
         this.coins = response;
         this.filteredCoins = response;
+        this.rows1 = response;
+        // cache our list
+        this.temp2 = [...response];
+        // push our inital complete list
+        this.rows2 = response;
       })
   }
 
@@ -52,5 +66,19 @@ export class AppComponent implements OnInit{
       coin.name.toLocaleLowerCase().includes(this.searchText.toLocaleLowerCase()) ||
       coin.symbol.toLocaleLowerCase().includes(this.searchText.toLocaleLowerCase())
     );
+  }
+
+  updateFilter(event) {
+    const val = event.target.value.toLowerCase();
+
+    // filter our data
+    const temp = this.temp2.filter(function (d) {
+      return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+    });
+
+    // update the rows
+    this.rows2 = temp;
+    // Whenever the filter changes, always go back to the first page
+    this.table.offset = 0;
   }
 }

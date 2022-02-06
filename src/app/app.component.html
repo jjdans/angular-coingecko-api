@@ -1,6 +1,20 @@
 <div class="container">
-  <h1>Coint List</h1>
+  <div>
+    <h3>Search and Filtering</h3>
+    <ngx-datatable
+      #table
+      class="material"
+      [rows]="rows1"
+      [columns]="columns1"
+      rowHeight="auto"
+      [headerHeight]="50"
+      [footerHeight]="50"
+      [limit]="10"
+    >
+    </ngx-datatable>
+  </div>
 
+  <h1>Coint List</h1>
   <input
     type="text"
     class="form-control bg-dark text-light border-0 my-4 text-center rounded-0"
