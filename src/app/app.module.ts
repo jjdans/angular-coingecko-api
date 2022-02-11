@@ -6,10 +6,12 @@ import { FormsModule } from "@angular/forms";
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
+import { CoinsTableComponent } from './components/coins-table/coins-table.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    CoinsTableComponent
   ],
   imports: [
     NgxDatatableModule,
