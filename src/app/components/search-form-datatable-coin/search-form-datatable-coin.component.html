@@ -1,0 +1,10 @@
+<form [formGroup]="searchForm">
+  <input
+    type="text"
+    style="padding:8px;margin:15px auto;width:30%;"
+    placeholder="Type to filter the coins"
+    name="search_text"
+    formControlName="search_text"
+    (keyup)="updateFilter()"
+  />
+</form>

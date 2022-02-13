@@ -1,3 +1,8 @@
 <div class="container">
-  <app-coins-table [coinsList]="coins" [coinsDatatableList]="rows1"></app-coins-table>
+  <h1>Coint Datatable</h1>
+  <app-search-form-datatable-coin (onSearchCoins)="searchCoinDatatable($event)"></app-search-form-datatable-coin>
+  <app-coins-datatable [coinsDatatableList]="rows"></app-coins-datatable>
+  <h1>Coint Table</h1>
+  <app-search-form-coin (onSearchCoins)="searchCoin($event)"></app-search-form-coin>
+  <app-coins-table [coinsList]="filteredCoins"></app-coins-table>
 </div>
